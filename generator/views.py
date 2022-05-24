@@ -11,14 +11,14 @@ def home(request):
 
 
 def password(request):
-    allowed_symbols = [letter for letter in string.ascii_lowercase]
+    allowed_symbols = list(string.ascii_lowercase)
 
     if request.GET.get('uppercase'):
-        allowed_symbols.extend([letter for letter in string.ascii_uppercase])
+        allowed_symbols.extend(list(string.ascii_uppercase))
     if request.GET.get('numbers'):
-        allowed_symbols.extend([digit for digit in string.digits])
+        allowed_symbols.extend(list(string.digits))
     if request.GET.get('special'):
-        allowed_symbols.extend([special for special in '!@#$%^&*()'])
+        allowed_symbols.extend(list('!@#$%^&*()'))
 
     password_length = int(request.GET.get('length'))
 
@@ -27,3 +27,7 @@ def password(request):
         password += random.choice(allowed_symbols)
 
     return render(request, 'generator/password.html', {'password': password})
+
+
+def about_author(request):
+    return render(request, 'generator/about_author.html')
